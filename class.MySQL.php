@@ -33,6 +33,7 @@ class MySQL {
 	var $username;	// MySQL Username
 	var $password;	// MySQL Password
 	var $database;	// MySQL Database
+	var $charset;	// MySQL Charset
 	
 	var $databaseLink;		// Database Connection Link
 	
@@ -42,11 +43,12 @@ class MySQL {
 	 * Class Constructor *
 	 * *******************/
 	
-	function MySQL($database, $username, $password, $hostname='localhost'){
+	function MySQL($database, $username, $password, $hostname='localhost', $charset='utf8'){
 		$this->database = $database;
 		$this->username = $username;
 		$this->password = $password;
 		$this->hostname = $hostname;
+		$this->charset = $charset;
 		
 		$this->Connect();
 	}
@@ -89,6 +91,9 @@ class MySQL {
 			$this->lastError = 'Cannot select database: ' . mysql_error($this->databaseLink);
 			return false;
 		}else{
+			mysql_query("SET character_set_connection=".$this->charset);
+                        mysql_query("SET character_set_client=".$this->charset);
+                        mysql_query("SET character_set_results=".$this->charset);
 			return true;
 		}
 	}

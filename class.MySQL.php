@@ -43,7 +43,7 @@ class MySQL {
 	 * Class Constructor *
 	 * *******************/
 	
-	function MySQL($database, $username, $password, $hostname='localhost', $charset='utf8'){
+	function MySQL($database, $username='root', $password='', $hostname='localhost', $charset='utf8'){
 		$this->database = $database;
 		$this->username = $username;
 		$this->password = $password;
